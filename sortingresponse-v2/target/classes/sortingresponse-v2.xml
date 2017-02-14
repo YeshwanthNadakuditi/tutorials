@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:spring="http://www.springframework.org/schema/beans" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-current.xsd
+http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd">
+    <flow name="sortingresponse-v2Flow">
+        <http:inbound-endpoint exchange-pattern="request-response" host="localhost" port="8090" doc:name="HTTP"/>
+        <scatter-gather doc:name="Scatter-Gather">
+         	<custom-aggregation-strategy class="com.mule.message.SortingTechnique2"/>
+         	<http:outbound-endpoint exchange-pattern="request-response" host="localhost" port="8091" path="flow1" method="POST" doc:name="Source1" contentType="application/json" responseTimeout="30000" />
+            <http:outbound-endpoint exchange-pattern="request-response" host="localhost" port="8091" path="flow2" method="POST" doc:name="Source2" contentType="application/json" responseTimeout="30000"/>
+            <http:outbound-endpoint exchange-pattern="request-response" host="localhost" port="8091" path="flow3" method="POST" doc:name="Source3" contentType="application/json" responseTimeout="30000"/>
+       </scatter-gather>
+       <logger message="#[payload:java.lang.String]" level="INFO" doc:name="Logger" category="Response Payload"/>
+    </flow>
+</mule>
