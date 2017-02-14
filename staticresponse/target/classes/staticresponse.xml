@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:http="http://www.mulesoft.org/schema/mule/http"
+	xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:spring="http://www.springframework.org/schema/beans" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-current.xsd
+http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd">
+
+  <flow name="staticresponseFlow">
+        <http:inbound-endpoint exchange-pattern="request-response" host="localhost" port="8091" path="flow1" doc:name="HTTP" contentType="application/json"/>
+        <parse-template location="D:\Mule3.5WS\staticresponse\src\main\resources\inputs\In1.json" doc:name="Parse Template"/>
+    </flow>
+	 <flow name="staticresponseFlow1">
+        <http:inbound-endpoint exchange-pattern="request-response" host="localhost" port="8091" path="flow2" doc:name="HTTP" contentType="application/json"/>
+        <parse-template location="D:\Mule3.5WS\staticresponse\src\main\resources\inputs\In2.json" doc:name="Parse Template"/>
+    </flow>
+    <flow name="staticresponseFlow2">
+        <http:inbound-endpoint exchange-pattern="request-response" host="localhost" port="8091" path="flow3" doc:name="HTTP" contentType="application/json"/>
+        <parse-template location="D:\Mule3.5WS\staticresponse\src\main\resources\inputs\In3.json" doc:name="Parse Template"/>
+    </flow>
+
+</mule>
