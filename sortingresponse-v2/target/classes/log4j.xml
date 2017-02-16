@@ -38,14 +38,19 @@
 	</logger>
 
     <!-- Mule classes -->
-	<logger name="org.mule">
+<!-- 	<logger name="org.mule">
 		<level value="INFO"/> 
 	</logger>
 	<logger name="com.mulesoft">
 		<level value="INFO"/> 
+	</logger> -->
+
+	<logger name="org.mule">
+		<level value="WARN"/> 
 	</logger>
-
-
+	<logger name="com.mulesoft">
+		<level value="WARN"/> 
+	</logger> 
 	<logger name="org.jetel">
 		<level value="WARN"/> 
 	</logger>
@@ -59,7 +64,8 @@
 	</logger-->
 
 	<root>
-		<level value="INFO" />
+		<!-- <level value="INFO" /> -->
+		<level value="WARN" />
 		<!-- appender-ref ref="asyncAppender" / --> <!-- use this appender for deploying to standalone -->
 		<appender-ref ref="console" />
 	</root>
