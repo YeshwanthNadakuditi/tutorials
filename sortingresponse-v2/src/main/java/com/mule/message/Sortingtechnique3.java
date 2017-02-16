@@ -25,8 +25,8 @@ public class Sortingtechnique3 implements AggregationStrategy {
 			try {
 				/*Concurrent Modification exception was due to parsing Mule event to JSON Obj*/
 				response = (String) event.getMessage().getPayloadAsString();
-				jsonArr = appendJSONArray(response);
-				
+				jsonObj = new JSONObject(response);
+				jsonArr = jsonObj.getJSONArray("records");
 				/* Using JSON Arrays cannot better the performance at all
 				 * srcjsonArr =  jsonObj.getJSONArray("records");
 				for (int i = 1; i < srcjsonArr.length(); i++) {
@@ -46,11 +46,5 @@ public class Sortingtechnique3 implements AggregationStrategy {
 		jsonResp.put("SortedRecords", jsonValues);
 		result.getMessage().setPayload(jsonResp.toString());
 		return result;
-	}
-	
-	public synchronized JSONArray appendJSONArray(String response){
-		jsonObj = new JSONObject(response);
-		jsonArr = jsonObj.getJSONArray("records");
-		return jsonArr;
 	}
 }
